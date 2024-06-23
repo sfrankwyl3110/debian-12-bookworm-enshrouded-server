@@ -1,0 +1,20 @@
+[Unit]
+Description=Enshrouded Dedicated Server
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=enshrouded
+Group=enshrouded
+Environment="templdpath=$LD_LIBRARY_PATH"
+Environment="SteamAppId=2278520"
+WorkingDirectory=/home/enshrouded/
+
+ExecStartPre=/home/enshrouded/enshrouded-maintenance.sh
+ExecStart=/usr/bin/wine64 /home/enshrouded/enshroudedserver/enshrouded_server.exe
+Restart=always
+RuntimeMaxSec=4h
+LimitCORE=0
+
+[Install]
+WantedBy=multi-user.target
